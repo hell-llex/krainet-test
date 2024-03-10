@@ -71,6 +71,13 @@ function disableBtnForm() {
 
 inputPolicy.addEventListener('change', disableBtnForm);
 
+function cleanForm() {
+  inputName.value = '';
+  inputEmail.value = '';
+  inputMessage.value = '';
+  contactsBtn.classList.add('button_disable');
+}
+
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const formData = {
@@ -86,5 +93,5 @@ form.addEventListener('submit', (e) => {
     },
   })
     .then((response) => response.json())
-    .then((json) => { alert(`${formData.name}. Спасибо, ваше сообщение отправлено!`), console.log('Data sent to the server :>> ', json) });
+    .then((json) => { cleanForm(), alert(`${formData.name}. Спасибо, ваше сообщение отправлено!`), console.log('Data sent to the server :>> ', json) });
 });
