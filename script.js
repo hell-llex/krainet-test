@@ -70,3 +70,21 @@ function disableBtnForm() {
 });
 
 inputPolicy.addEventListener('change', disableBtnForm);
+
+form.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const formData = {
+    name: inputName.value,
+    email: inputEmail.value,
+    message: inputMessage.value,
+  };
+  fetch('https://jsonplaceholder.typicode.com/posts', {
+    method: 'POST',
+    body: JSON.stringify(formData),
+    headers: {
+      'Content-type': 'application/json; charset=UTF-8',
+    },
+  })
+    .then((response) => response.json())
+    .then((json) => { alert(`${formData.name}. Спасибо, ваше сообщение отправлено!`), console.log('Data sent to the server :>> ', json) });
+});
